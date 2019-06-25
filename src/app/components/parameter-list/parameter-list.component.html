@@ -1,0 +1,104 @@
+<sidebar-container>
+  <div class="grid-container">
+    <grid-header
+      [filterText]="filterText"
+      (filterTextChange)="setFilterText($event)"
+      (saveState)="saveState(gridId)"
+      (restoreState)="restoreState(gridId)"
+      (resetState)="resetState(gridId)"
+      (exportCsv)="onExport()"
+    >
+      <div class="btn-group mr-2">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="isDisabled"
+          (click)="openDialog('Export')"
+        >
+          Export
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="isDisabled"
+          (click)="openDialog('Plot')"
+        >
+          Plot
+        </button>
+      </div>
+      <div class="btn-group">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          [disabled]="isDisabled"
+          (click)="addParametersToFavorite()"
+        >
+          Favorite
+        </button>
+        <div class="btn-group" ngbDropdown>
+          <button
+            type="button"
+            class="btn btn-outline-secondary dropdown-toggle-split"
+            ngbDropdownToggle
+            [disabled]="isDisabled"
+          >
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div ngbDropdownMenu>
+            <h6 class="dropdown-header">Add to favorite group</h6>
+            <button class="dropdown-item" (click)="addParametersToFavorite()">
+              Default
+            </button>
+            <button
+              *ngFor="let groupName of getGroupNames()"
+              class="dropdown-item"
+              (click)="addParametersToFavorite(groupName)"
+            >
+              {{ groupName }}
+            </button>
+            <div class="dropdown-divider"></div>
+            <button
+              class="dropdown-item"
+              (click)="addParametersToNewFavorite()"
+            >
+              New group
+            </button>
+            <div class="dropdown-divider" *ngIf="parameterIds.length > 0"></div>
+            <button
+              *ngIf="parameterIds.length > 0 && groupName"
+              class="dropdown-item text-danger"
+              (click)="removeParametersFromFavorite()"
+            >
+              Remove from {{ groupName }}
+            </button>
+            <button
+              *ngIf="parameterIds.length > 0 && !groupName"
+              class="dropdown-item text-danger"
+              (click)="removeParametersFromFavorite()"
+            >
+              Remove from Default
+            </button>
+          </div>
+        </div>
+      </div>
+    </grid-header>
+    <ag-grid-angular
+      class="ag-theme-balham grid-table"
+      [gridOptions]="gridOptions"
+      [columnDefs]="columnDefinitions"
+      [rowData]="rowData"
+      (gridReady)="onGridReady($event, gridId)"
+      (rowDoubleClicked)="onRowDoubleClicked($event)"
+      (cellValueChanged)="onCellValueChanged($event)"
+      (selectionChanged)="onSelectionChanged($event)"
+      (keydown)="onKeyDown($event)"
+      (firstDataRendered)="onFirstDataRendered()"
+    ></ag-grid-angular>
+  </div>
+
+  <div sidebar>
+    <sidebar-parameter-favorite-list></sidebar-parameter-favorite-list>
+
+    <sidebar-list-keyboard-shortcut></sidebar-list-keyboard-shortcut>
+  </div>
+</sidebar-container>

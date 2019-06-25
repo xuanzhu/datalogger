@@ -1,0 +1,121 @@
+<ng-template #notification let-notificationData="notification">
+  <a
+    href="https://allseas.topdesk.net/tas/public/ssp/content/serviceflow?unid=6dddcf8fc1664791bfecf88357f917cc&from=bb6b37c3-9718-4563-a0ac-667dfd4cad34&openedFromService=true"
+    target="_blank"
+  >
+    {{ notificationData.message }}
+  </a>
+</ng-template>
+<sidebar-container>
+  <div class="card-columns">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Datalogger parameters</h5>
+        <a class="card-link display-4" routerLink="../parameters">
+          {{ dataloggerParameterCountText }}
+        </a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Production parameters</h5>
+        <a class="card-link display-4" routerLink="../production-parameters">
+          {{ productionParameterCountText }}
+        </a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ welcomeUser }}</h5>
+        <p class="card-text">You have the following roles</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          Admin
+          <span class="badge" [ngClass]="userRoleClass(userRoleEnum.Admin)">
+            {{ userRoleText(userRoleEnum.Admin) }}
+          </span>
+        </li>
+        <li class="list-group-item">
+          DataloggerRead
+          <span
+            class="badge"
+            [ngClass]="userRoleClass(userRoleEnum.DataloggerRead)"
+          >
+            {{ userRoleText(userRoleEnum.DataloggerRead) }}
+          </span>
+        </li>
+        <li class="list-group-item">
+          DataloggerWrite
+          <span
+            class="badge"
+            [ngClass]="userRoleClass(userRoleEnum.DataloggerWrite)"
+          >
+            {{ userRoleText(userRoleEnum.DataloggerWrite) }}
+          </span>
+        </li>
+        <li class="list-group-item">
+          PpdRead
+          <span class="badge" [ngClass]="userRoleClass(userRoleEnum.PpdRead)">
+            {{ userRoleText(userRoleEnum.PpdRead) }}
+          </span>
+        </li>
+        <li class="list-group-item">
+          PpdWrite
+          <span class="badge" [ngClass]="userRoleClass(userRoleEnum.PpdWrite)">
+            {{ userRoleText(userRoleEnum.PpdWrite) }}
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Latest datalogger data</h5>
+        <p class="card-text text-muted">
+          Timestamp (UTC): {{ dataloggerTimestampText }}
+        </p>
+        <a class="card-link" routerLink="../parameters">Start plotting</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Latest production event</h5>
+        <p class="card-text text-muted">
+          Timestamp (UTC): {{ productionEventTimestampText }}
+        </p>
+        <a class="card-link" routerLink="../production-events">See events</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">API Server</h5>
+        <p class="card-text text-muted">
+          Release date: {{ apiVersion?.CommitDate }}
+        </p>
+        <div class="mb-3" *ngIf="isApiToggleVisible">
+          <div class="btn-group btn-group-sm">
+            <a
+              class="btn btn-outline-secondary"
+              [class.active]="!apiIsRemote"
+              [href]="urlVesselLocal"
+            >
+              Local
+            </a>
+            <a
+              class="btn btn-outline-secondary"
+              [class.active]="apiIsRemote"
+              [href]="urlVesselRemote"
+            >
+              Remote
+            </a>
+          </div>
+        </div>
+        <a class="card-link" [href]="apiUrl" target="_blank"> {{ apiUrl }} </a>
+      </div>
+    </div>
+  </div>
+
+  <div sidebar>
+    <sidebar-parameter-favorite-list></sidebar-parameter-favorite-list>
+  </div>
+</sidebar-container>

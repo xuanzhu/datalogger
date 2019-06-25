@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h4 class="modal-title">Ip address: {{ data.IpAddress }}</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <table class="table">
+    <tr>
+      <th>Description</th>
+      <td>{{ data.Description }}</td>
+    </tr>
+    <tr>
+      <th>Switch Id</th>
+      <td>{{ data.SwitchID }}</td>
+    </tr>
+    <tr>
+      <th>Switch Port</th>
+      <td>{{ data.SwitchPort }}</td>
+    </tr>
+    <tr>
+      <th>Numeric Id</th>
+      <td>{{ data.NumericID }}</td>
+    </tr>
+    <tr>
+      <th>Host Name</th>
+      <td>{{ data.HostName }}</td>
+    </tr>
+    <tr>
+      <th>MAC Address</th>
+      <td>{{ data.MAC_Address }}</td>
+    </tr>
+    <tr>
+      <th>SubNet_Mask</th>
+      <td>{{ data.SubNet_Mask }}</td>
+    </tr>
+    <tr>
+      <th>Online</th>
+      <td>{{ onlineState[data.Online] }}</td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,75 @@
+<div class="mt-4 mb-4">
+  <div class="row">
+    <div class="col-sm-3">
+      <debounced-text-input
+        [debounceTime]="500"
+        [text]="filterText"
+        placeholder="Filter (all fields)"
+        (textChange)="setFilterText($event)"
+      ></debounced-text-input>
+    </div>
+    <div class="col"><ng-content></ng-content></div>
+    <div class="col-sm-3 text-right">
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        [class.active]="showAdvancedOptions"
+        (click)="toggleAdvancedOptions()"
+      >
+        Advanced options
+      </button>
+    </div>
+  </div>
+
+  <div class="card mt-4" *ngIf="showAdvancedOptions">
+    <div class="card-body">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Grid state</label>
+        <div class="col-sm-10">
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="sendSaveStateEvent()"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="sendRestoreStateEvent()"
+            >
+              Restore
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="sendResetStateEvent()"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row mb-0">
+        <label class="col-sm-2 col-form-label">CSV</label>
+        <div class="col-sm-10">
+          <div class="input-group" style="width: 120px">
+            <input
+              type="text"
+              class="form-control"
+              placeholder=";"
+              [(ngModel)]="csvColumnSeparator"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" (click)="onExport()">
+                Export
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

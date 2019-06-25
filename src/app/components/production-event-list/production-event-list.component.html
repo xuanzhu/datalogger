@@ -1,0 +1,71 @@
+<sidebar-container>
+  <div class="grid-container" *ngIf="!isLoading">
+    <grid-header
+      [filterText]="filterText"
+      (filterTextChange)="setFilterText($event)"
+      (saveState)="saveState(gridId)"
+      (restoreState)="restoreState(gridId)"
+      (resetState)="resetState(gridId)"
+      (exportCsv)="onExport()"
+    >
+      <div class="btn-group">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="changeDateRange()"
+        >
+          Change date range
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="changeParameters()"
+        >
+          Change parameters
+        </button>
+      </div>
+    </grid-header>
+    <ag-grid-angular
+      class="ag-theme-balham grid-table"
+      [gridOptions]="gridOptions"
+      [columnDefs]="columnDefinitions"
+      [rowData]="productionEvents"
+      (gridReady)="onGridReady($event, gridId)"
+      (firstDataRendered)="onFirstDataRendered()"
+    ></ag-grid-angular>
+  </div>
+
+  <loading-spinner
+    *ngIf="isLoading"
+    [information]="loadingInfo"
+  ></loading-spinner>
+
+  <div sidebar>
+    <sidebar-block header="Production events">
+      <ul class="specs">
+        <li>
+          <strong>Start (UTC):</strong> {{ dateStart?.format(dateTimeFormat) }}
+        </li>
+        <li>
+          <strong>End (UTC):</strong> {{ dateEnd?.format(dateTimeFormat) }}
+        </li>
+        <li>
+          <strong>Number of events:</strong> {{ productionEvents?.length || 0 }}
+        </li>
+      </ul>
+    </sidebar-block>
+
+    <sidebar-block header="Ready light events">
+      <small class="text-danger">
+        All ready light events include "Pay_Out_Tensioners_PPD" duration.
+      </small>
+    </sidebar-block>
+
+    <sidebar-production-parameter-selected-list
+      [parameterIds]="parameterIds"
+      *ngIf="parameterIds.length > 0"
+    ></sidebar-production-parameter-selected-list>
+
+    <sidebar-list-keyboard-shortcut></sidebar-list-keyboard-shortcut>
+  </div>
+</sidebar-container>

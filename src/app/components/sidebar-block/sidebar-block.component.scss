@@ -1,0 +1,25 @@
+@import "../../../styles/bootstrap.scss";
+
+h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+  padding: 0 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+.content {
+  padding: 0.4rem 1rem;
+}
+
+:host ::ng-deep ul.specs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 80%;
+
+  li {
+    margin: 0.2rem 0;
+  }
+}

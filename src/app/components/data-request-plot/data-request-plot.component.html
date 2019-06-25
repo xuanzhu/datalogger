@@ -1,0 +1,66 @@
+<sidebar-container>
+  <div class="plot-container" *ngIf="!isLoading">
+    <div class="toolbar pb-4">
+      <div class="btn-group mr-2">
+        <button type="button" class="btn btn-primary" (click)="createNewPlot()">
+          Change plot
+        </button>
+      </div>
+      <div class="btn-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Y axis</div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="setYAuto()"
+        >
+          Auto
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="setYMin()"
+        >
+          Set min
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="setYMax()"
+        >
+          Set max
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          [class.active]="isNormalized"
+          (click)="normalizeYAxis()"
+        >
+          Normalize
+        </button>
+      </div>
+    </div>
+
+    <div class="plot"><div [chart]="plot"></div></div>
+  </div>
+
+  <loading-spinner *ngIf="isLoading" [information]="loadingInfo">
+    <button type="button" class="btn btn-link" (click)="cancelPlot()">
+      Cancel plotting
+    </button>
+  </loading-spinner>
+
+  <div sidebar>
+    <sidebar-data-request-details
+      [jobIds]="jobIds"
+    ></sidebar-data-request-details>
+
+    <sidebar-block header="Plot interaction">
+      <ul class="specs">
+        <li><strong>Pan</strong>: <kbd>Shift</kbd> + drag</li>
+        <li><strong>Zoom</strong>: Scroll wheel</li>
+      </ul>
+    </sidebar-block>
+  </div>
+</sidebar-container>

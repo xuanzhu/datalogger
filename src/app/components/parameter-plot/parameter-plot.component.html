@@ -1,0 +1,56 @@
+<sidebar-container>
+  <div class="plot-container" *ngIf="initialized">
+    <div class="toolbar">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-secondary" (click)="setEarlier()">
+            &lsaquo; Earlier
+          </button>
+        </div>
+        <select
+          class="form-control interval"
+          [(ngModel)]="interval"
+          (keydown)="keyDown($event)"
+        >
+          <option [value]="60">1 minute</option>
+          <option [value]="300">5 minutes</option>
+          <option [value]="900">15 minutes</option>
+          <option [value]="3600">1 hour</option>
+        </select>
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            [disabled]="isLaterDisabled"
+            (click)="setLater()"
+          >
+            Later &rsaquo;
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="plot"><div [chart]="plot"></div></div>
+  </div>
+
+  <loading-spinner
+    *ngIf="!initialized"
+    information="Loading..."
+  ></loading-spinner>
+
+  <div sidebar>
+    <sidebar-block header="Plot details">
+      <ul class="specs">
+        <li><strong>Start (UTC):</strong> {{ dateStartText }}</li>
+        <li><strong>End (UTC):</strong> {{ dateEndText }}</li>
+        <li><strong>Interval:</strong> {{ intervalText }}</li>
+      </ul>
+    </sidebar-block>
+
+    <sidebar-block header="Keyboard shortcuts">
+      <ul class="specs">
+        <li><strong>Earlier:</strong>&nbsp; <kbd>&larr;</kbd></li>
+        <li><strong>Later:</strong>&nbsp; <kbd>&rarr;</kbd></li>
+      </ul>
+    </sidebar-block>
+  </div>
+</sidebar-container>

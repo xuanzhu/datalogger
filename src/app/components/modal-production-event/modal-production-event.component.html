@@ -1,0 +1,94 @@
+<div class="modal-header">
+  <h4 class="modal-title">Date range</h4>
+  <button type="button" class="close" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form [formGroup]="form" (submit)="submit()">
+  <div class="modal-body">
+    <div class="form-group row">
+      <label for="dateStart" class="col-sm-3 col-form-label">Start (UTC)</label>
+      <div class="col-sm-9">
+        <date-time-input
+          formControlName="dateStart"
+          inputId="dateStart"
+          autofocus
+          required
+          [invalid]="
+            (form.errors && form.errors['timeSpanNegative']) ||
+            (form.errors && form.errors['timeSpanOutOfRange']) ||
+            form.get('dateStart').invalid
+          "
+        ></date-time-input>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="dateEnd" class="col-sm-3 col-form-label">End (UTC)</label>
+      <div class="col-sm-9">
+        <date-time-input
+          formControlName="dateEnd"
+          inputId="dateEnd"
+          required
+          [invalid]="
+            (form.errors && form.errors['timeSpanNegative']) ||
+            (form.errors && form.errors['timeSpanOutOfRange']) ||
+            form.get('dateEnd').invalid
+          "
+        ></date-time-input>
+        <div
+          class="invalid-feedback d-block"
+          *ngIf="form.errors && form.errors['timeSpanNegative']"
+        >
+          Date end should be after start
+        </div>
+        <div
+          class="invalid-feedback d-block"
+          *ngIf="form.errors && form.errors['timeSpanOutOfRange']"
+        >
+          Date range cannot be more than 1 week
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row justify-content-end mb-0">
+      <div class="col-sm-9">
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="setLastHour()"
+          >
+            Last hour
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="setLastDay()"
+          >
+            Last day
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="setLastWeek()"
+          >
+            Last week
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" (click)="cancel()">
+      Cancel
+    </button>
+    <submit-button
+      [disabled]="!form.valid"
+      [loading]="isSubmitting"
+      text="Save"
+    ></submit-button>
+  </div>
+</form>

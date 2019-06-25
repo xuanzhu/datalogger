@@ -1,0 +1,73 @@
+<div class="modal-header">
+  <h4 class="modal-title">Data source: {{ data.ShortName }}</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <table class="table">
+    <tr>
+      <th>Id</th>
+      <td>{{ data.Id }}</td>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <td>{{ data.Name }}</td>
+    </tr>
+    <tr>
+      <th>Location</th>
+      <td>{{ data.Location }}</td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>{{ data.Description }}</td>
+    </tr>
+    <tr>
+      <th>Converter</th>
+      <td>{{ data.Converter }}</td>
+    </tr>
+    <tr>
+      <th>Converter Port</th>
+      <td>{{ data.ConverterPort }}</td>
+    </tr>
+    <tr>
+      <th>ItemNumber</th>
+      <td>{{ data.ItemNumber }}</td>
+    </tr>
+    <tr>
+      <th>Type</th>
+      <td>{{ data.Type }}</td>
+    </tr>
+    <tr>
+      <th>Maker</th>
+      <td>{{ data.Maker }}</td>
+    </tr>
+    <tr>
+      <th>Supplier</th>
+      <td>{{ data.Supplier }}</td>
+    </tr>
+    <tr (click)="showIpAddressDetail(data.IpAddress)" style="cursor: pointer;">
+      <th>IP address</th>
+      <td style="color: #007bff; text-decoration: underline">
+        {{ data.IpAddress }}
+      </td>
+    </tr>
+    <tr>
+      <th>Ping status</th>
+      <td>{{ pingState[data.PingStatus] }}</td>
+    </tr>
+    <tr>
+      <th>Ping Status last changed</th>
+      <td>{{ data.PingStatusTime | date: "yyyy-MM-dd HH:mm:ss" }}</td>
+    </tr>
+    <tr>
+      <th>Should be online?</th>
+      <td>{{ onlineState[data.Online] }}</td>
+    </tr>
+  </table>
+</div>

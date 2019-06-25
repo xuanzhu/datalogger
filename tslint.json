@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-airbnb",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "no-console": [true, "log"],
+    "no-else-after-return": false,
+    "object-literal-shorthand": false,
+    "object-literal-sort-keys": false,
+    "ter-arrow-parens": [true, "as-needed"]
+  },
+  "rulesDirectory": ["node_modules/codelyzer"]
+}

@@ -1,0 +1,17 @@
+<div class="row">
+  <nav class="col-lg-2 col-md-3 bg-light sidebar" [class.block]="hasSidebar">
+    <div #sidebarContent class="sidebar-sticky">
+      <ng-content select="[sidebar]"></ng-content>
+    </div>
+  </nav>
+
+  <main
+    role="main"
+    [ngClass]="{
+      'col-lg-10 col-md-9 ml-sm-auto': hasSidebar,
+      'col-12': !hasSidebar
+    }"
+  >
+    <ng-content></ng-content>
+  </main>
+</div>

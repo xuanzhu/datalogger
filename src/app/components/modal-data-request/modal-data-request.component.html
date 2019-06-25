@@ -1,0 +1,193 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form [formGroup]="form" (submit)="submit()">
+  <div class="modal-body">
+    <div class="form-group row">
+      <label for="dateStart" class="col-sm-3 col-form-label">Start (UTC)</label>
+      <div class="col-sm-9">
+        <date-time-input
+          formControlName="dateStart"
+          inputId="dateStart"
+          autofocus
+          required
+          [invalid]="
+            (form.errors && form.errors['timeSpanNegative']) ||
+            form.get('dateStart').invalid
+          "
+        ></date-time-input>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="dateEnd" class="col-sm-3 col-form-label">End (UTC)</label>
+      <div class="col-sm-9">
+        <date-time-input
+          formControlName="dateEnd"
+          inputId="dateEnd"
+          required
+          [invalid]="
+            (form.errors && form.errors['timeSpanNegative']) ||
+            form.get('dateEnd').invalid
+          "
+        ></date-time-input>
+
+        <div
+          class="invalid-feedback d-block"
+          *ngIf="form.errors && form.errors['timeSpanNegative']"
+        >
+          Date end should be after start
+        </div>
+        <div
+          class="invalid-feedback d-block"
+          *ngIf="form.get('dateEnd').invalid"
+        >
+          {{ getErrorMessage(form.get("dateEnd")) }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="aggregationType" class="col-sm-3 col-form-label"
+        >Aggregation</label
+      >
+      <div class="col-sm-9">
+        <select
+          class="form-control"
+          id="aggregationType"
+          formControlName="aggregationType"
+        >
+          <option
+            *ngFor="let aggregationType of aggregationTypes"
+            [value]="aggregationType.key"
+          >
+            {{ aggregationType.value }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div
+      class="form-group row"
+      *ngIf="form.get('aggregationType').value !== AggregationType.None"
+    >
+      <label for="aggregationPeriodS" class="col-sm-3 col-form-label"
+        >Aggregation period (s)</label
+      >
+      <div class="col-sm-9">
+        <input
+          type="number"
+          class="form-control"
+          [class.is-invalid]="form.get('aggregationPeriods').invalid"
+          id="aggregationPeriodS"
+          formControlName="aggregationPeriods"
+          required
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('aggregationPeriods').invalid"
+        >
+          {{ getErrorMessage(form.get("aggregationPeriods")) }}
+        </div>
+      </div>
+    </div>
+
+    <fieldset class="form-group">
+      <legend>Pre-filtering</legend>
+
+      <div class="form-group row">
+        <label for="valueMin" class="col-sm-3 col-form-label">
+          Value range
+        </label>
+        <div class="col-sm-9">
+          <div class="input-group">
+            <input
+              type="number"
+              placeholder="Min"
+              class="form-control"
+              [class.is-invalid]="
+                form.errors && form.errors['valueDiffNegative']
+              "
+              id="valueMin"
+              formControlName="valueMin"
+            />
+            <input
+              type="number"
+              placeholder="Max"
+              class="form-control"
+              [class.is-invalid]="
+                form.errors && form.errors['valueDiffNegative']
+              "
+              id="valueMax"
+              formControlName="valueMax"
+            />
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="form.errors && form.errors['valueDiffNegative']"
+          >
+            Maximum value should be higher than minimum
+          </div>
+          <small class="form-text text-muted">
+            Raw values should be between [min, max].
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="deadband" class="col-sm-3 col-form-label">Deadband</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            [class.is-invalid]="form.get('deadBand').invalid"
+            id="deadband"
+            formControlName="deadBand"
+            required
+          />
+          <div class="invalid-feedback" *ngIf="form.get('deadBand').invalid">
+            {{ getErrorMessage(form.get("deadBand")) }}
+          </div>
+          <small class="form-text text-muted">
+            Absolute threshold which the raw values can be varying without
+            changing the output value.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group row mb-0">
+        <label for="sampleRateS" class="col-sm-3 col-form-label">
+          Sample rate (s)
+        </label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            [class.is-invalid]="form.get('sampleRates').invalid"
+            id="sampleRateS"
+            formControlName="sampleRates"
+            required
+          />
+          <div class="invalid-feedback" *ngIf="form.get('sampleRates').invalid">
+            {{ getErrorMessage(form.get("sampleRates")) }}
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" (click)="cancel()">
+      Cancel
+    </button>
+    <submit-button
+      [disabled]="!form.valid"
+      [loading]="isSubmitting"
+      [text]="actionName"
+    ></submit-button>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+<sidebar-container>
+  <div *ngIf="!isLoading" class="py-4">
+    <p>
+      The download should have started. If this didn't happen, you can download
+      it manually with the following URLs:
+    </p>
+    <ul>
+      <li *ngFor="let jobId of jobIds">
+        <a
+          *ngIf="(parameters$.get(jobId) | async) as parameter"
+          [href]="getUrl(jobId)"
+          >{{ parameter.LongName }}</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <loading-spinner *ngIf="isLoading" [information]="loadingInfo">
+    <button type="button" class="btn btn-link" (click)="cancelExport()">
+      Cancel exporting
+    </button>
+  </loading-spinner>
+
+  <div sidebar>
+    <sidebar-data-request-details
+      [jobIds]="jobIds"
+    ></sidebar-data-request-details>
+  </div>
+</sidebar-container>

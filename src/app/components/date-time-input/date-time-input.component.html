@@ -1,0 +1,28 @@
+<div class="input-group">
+  <input
+    class="form-control"
+    [attr.id]="inputId"
+    [attr.placeholder]="placeholder"
+    [attr.ngbAutofocus]="autofocus"
+    [attr.autofocus]="autofocus"
+    [attr.required]="required"
+    [class.is-invalid]="invalid"
+    [ngModel]="dateInput"
+    (ngModelChange)="setDateInput($event)"
+    (blur)="formatDateInput()"
+  />
+  <input
+    #d="ngbDatepicker"
+    class="hidden-input"
+    ngbDatepicker
+    [ngModel]="dateDatepicker"
+    (dateSelect)="setDateSelect($event)"
+  />
+  <div class="input-group-append">
+    <button
+      class="btn btn-outline-secondary calendar"
+      (click)="d.toggle()"
+      type="button"
+    ></button>
+  </div>
+</div>

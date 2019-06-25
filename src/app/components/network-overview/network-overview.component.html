@@ -1,0 +1,43 @@
+<div class="my-4 filter bg-white">
+  <div class="row filter-bottom">
+    <div class="col-sm-3">
+      <debounced-text-input
+        placeholder="Filter..."
+        [text]="filterText"
+        (textChange)="setFilterText($event)"
+      ></debounced-text-input>
+    </div>
+    <div class="col-sm-3">
+      <select
+        class="form-control"
+        [ngModel]="filterState"
+        (ngModelChange)="setFilterState($event)"
+      >
+        <option [value]="null">All states</option>
+        <option [value]="onlineState.Online">Online</option>
+        <option [value]="onlineState.Offline">Offline</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <select
+        class="form-control"
+        [ngModel]="channelFilterState"
+        (ngModelChange)="setChannelFilterState($event)"
+      >
+        <option [value]="null">All channel states</option>
+        <option [value]="channelState.Good">Good</option>
+        <option [value]="channelState.Bad">Bad</option>
+      </select>
+    </div>
+  </div>
+</div>
+<p *ngIf="!networkOverviewData && !loading" class="text-muted">
+  No data has been found, did you filter too much?
+</p>
+<div class="tree-container">
+  <d3-tree
+    *ngIf="!!networkOverviewData"
+    [data]="networkOverviewData"
+    (nodeClicked)="click($event.data)"
+  ></d3-tree>
+</div>

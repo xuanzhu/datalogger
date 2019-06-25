@@ -1,0 +1,30 @@
+<sidebar-block header="Favorite parameters">
+  <ul class="favorite-parameters" *ngIf="favoriteParameters.length > 0">
+    <li *ngIf="hasDefaultGroup()" class="nav-item">
+      <a class="nav-link" [routerLink]="getRouterLink()">
+        <span class="group-name">Default</span>
+        <span class="badge badge-secondary">{{
+          getParameterIdsByGroup().length
+        }}</span>
+        <span class="remove-favorite" (click)="removeGroup($event)"
+          >&times;</span
+        >
+      </a>
+    </li>
+    <li *ngFor="let groupName of getGroupNames()" class="nav-item">
+      <a class="nav-link" [routerLink]="getRouterLink(groupName)">
+        <span class="group-name" [title]="groupName">{{ groupName }}</span>
+        <span class="badge badge-secondary">{{
+          getParameterIdsByGroup(groupName).length
+        }}</span>
+        <span class="remove-favorite" (click)="removeGroup($event, groupName)"
+          >&times;</span
+        >
+      </a>
+    </li>
+  </ul>
+
+  <p class="sidebar-content" *ngIf="favoriteParameters.length === 0">
+    <small class="text-muted">No parameters have been marked as favorite</small>
+  </p>
+</sidebar-block>

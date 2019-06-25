@@ -1,0 +1,31 @@
+.plot-container {
+  display: flex;
+  height: 100%;
+  padding-top: 1.5rem;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.toolbar {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  padding-bottom: 1.5rem;
+
+  select.interval {
+    max-width: 120px;
+  }
+}
+
+.plot {
+  position: relative;
+  height: 100%;
+
+  & > div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}

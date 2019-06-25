@@ -1,0 +1,44 @@
+<sidebar-container>
+  <div class="grid-container">
+    <grid-header
+      [filterText]="filterText"
+      (filterTextChange)="setFilterText($event)"
+      (saveState)="saveState(gridId)"
+      (restoreState)="restoreState(gridId)"
+      (resetState)="resetState(gridId)"
+      (exportCsv)="onExport()"
+    >
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="isDisabled"
+        (click)="showEvents()"
+      >
+        Show events
+      </button>
+    </grid-header>
+    <ag-grid-angular
+      class="ag-theme-balham grid-table"
+      [gridOptions]="gridOptions"
+      [columnDefs]="columnDefinitions"
+      [rowData]="productionParameters"
+      (gridReady)="onGridReady($event, gridId)"
+      (firstDataRendered)="onFirstDataRendered()"
+      (selectionChanged)="onSelectionChanged($event)"
+    ></ag-grid-angular>
+  </div>
+
+  <div sidebar>
+    <sidebar-block header="Production parameters">
+      <ul class="specs">
+        <li>
+          <strong>Number of parameters:</strong>
+          {{ productionParameters?.length }}
+        </li>
+        <li><strong>Selected parameters:</strong> {{ selectedIds.length }}</li>
+      </ul>
+    </sidebar-block>
+
+    <sidebar-list-keyboard-shortcut></sidebar-list-keyboard-shortcut>
+  </div>
+</sidebar-container>

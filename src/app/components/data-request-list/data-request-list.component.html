@@ -1,0 +1,47 @@
+<sidebar-container>
+  <div class="grid-container">
+    <grid-header
+      [filterText]="filterText"
+      (filterTextChange)="setFilterText($event)"
+      (saveState)="saveState(gridId)"
+      (restoreState)="restoreState(gridId)"
+      (resetState)="resetState(gridId)"
+      (exportCsv)="onExport()"
+    >
+      <div class="btn-group">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="isDisabled"
+          (click)="export()"
+        >
+          Export
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="isDisabled"
+          (click)="plot()"
+        >
+          Plot
+        </button>
+      </div>
+    </grid-header>
+    <ag-grid-angular
+      class="ag-theme-balham grid-table"
+      [gridOptions]="gridOptions"
+      [columnDefs]="columnDefinitions"
+      [rowData]="rowData"
+      (gridReady)="onGridReady($event, gridId)"
+      (selectionChanged)="onSelectionChanged($event)"
+      (rowDataChanged)="checkSelectedRows()"
+      (firstDataRendered)="onFirstDataRendered()"
+    ></ag-grid-angular>
+  </div>
+
+  <div sidebar>
+    <sidebar-parameter-favorite-list></sidebar-parameter-favorite-list>
+
+    <sidebar-list-keyboard-shortcut></sidebar-list-keyboard-shortcut>
+  </div>
+</sidebar-container>

@@ -1,0 +1,121 @@
+<div class="modal-header">
+  <h4 class="modal-title">Channel: {{ data.ShortName }}</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <table class="table">
+    <tr>
+      <th>Id</th>
+      <td>{{ data.Id }}</td>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <td
+        style="color: #007bff; text-decoration: underline; cursor: pointer"
+        (click)="navigateToParameter(data.Name)"
+      >
+        {{ data.Name }}
+      </td>
+    </tr>
+    <tr>
+      <th>Location</th>
+      <td>{{ data.Location }}</td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>{{ data.Description }}</td>
+    </tr>
+    <tr>
+      <th>FilingCode TD</th>
+      <td>
+        <a
+          style="color: #007bff; text-decoration: underline"
+          href="https://datamonitoring.allseas.global/SystemInformation/Forms/AllItems.aspx?FilterField1=SFI&FilterValue1={{data.FilingCodeTD}}"
+          target="_blank"
+        >
+          {{ data.FilingCodeTD }}
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Converter</th>
+      <td>{{ data.Converter }}</td>
+    </tr>
+    <tr>
+      <th>Converter Port</th>
+      <td>{{ data.ConverterPort }}</td>
+    </tr>
+    <tr>
+      <th>DataSource</th>
+      <td>{{ data.DataSource }}</td>
+    </tr>
+    <tr>
+      <th>Item Number</th>
+      <td>{{ data.ItemNumber }}</td>
+    </tr>
+    <tr>
+      <th>Protocol</th>
+      <td>{{ data.Protocol }}</td>
+    </tr>
+    <tr>
+      <th>Type</th>
+      <td>{{ data.Type }}</td>
+    </tr>
+    <tr>
+      <th>Maker</th>
+      <td>{{ data.Maker }}</td>
+    </tr>
+    <tr>
+      <th>Source Frequency</th>
+      <td>{{ data.SourceFrequency }}</td>
+    </tr>
+    <tr>
+      <th>Serial Connection Parameter</th>
+      <td>{{ data.SerialConnectionParameter }}</td>
+    </tr>
+    <tr>
+      <th>Supplier</th>
+      <td>{{ data.Supplier }}</td>
+    </tr>
+    <tr>
+      <th>Kepserver Frequency</th>
+      <td>{{ data.KepserverFrequency }}</td>
+    </tr>
+    <tr (click)="showIpAddressDetail(data.IpAddress)" style="cursor: pointer;">
+      <th>IP address</th>
+      <td style="color: #007bff; text-decoration: underline">
+        {{ data.IpAddress }}
+      </td>
+    </tr>
+    <tr>
+      <th>Ping status</th>
+      <td>{{ pingState[data.PingStatus] }}</td>
+    </tr>
+    <tr>
+      <th>Ping Status last changed</th>
+      <td>{{ data.PingStatusTime | date: "yyyy-MM-dd HH:mm:ss" }}</td>
+    </tr>
+    <tr>
+      <th>Should be online?</th>
+      <td>{{ onlineState[data.Online] }}</td>
+    </tr>
+    <tr>
+      <th>Channel gets data?</th>
+      <td>{{ channelState[data.ChannelLastState] }}</td>
+    </tr>
+    <tr>
+      <th>Channel Status last changed</th>
+      <td>
+        {{ data.ChannelLastStateTimestamp | date: "yyyy-MM-dd HH:mm:ss" }}
+      </td>
+    </tr>
+  </table>
+</div>

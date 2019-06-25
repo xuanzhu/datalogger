@@ -1,0 +1,70 @@
+<div *ngIf="parameter" class="mt-4">
+  <h2>Parameter “{{parameter.LongName}}”</h2>
+
+  <form (submit)="save()">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">ID</label>
+      <label class="col-sm-10 col-form-label">{{parameter.Id}}</label>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Name</label>
+      <label class="col-sm-10 col-form-label">{{parameter.Name}}</label>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Range low</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="parameter.RangeLow" class="form-control" name="rangeLow" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Range high</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="parameter.RangeHigh" class="form-control" name="rangeHigh" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Storage rate [ms]</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="parameter.StorageRate" class="form-control" name="storageRate" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Deadband</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="parameter.DeadBandValue" class="form-control" name="deadband" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Unit</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="parameter.Unit" class="form-control" name="unit" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Address</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="parameter.Address" class="form-control" name="address" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Description</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="parameter.Description" class="form-control" name="description" />
+      </div>
+    </div>
+
+    <div class="form-group row justify-content-end">
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

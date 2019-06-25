@@ -1,0 +1,17 @@
+.details {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .name {
+    margin-right: 0.3rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: bold;
+
+    &:after {
+      content: ":";
+    }
+  }
+}

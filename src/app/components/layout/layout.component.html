@@ -1,0 +1,145 @@
+<nav
+  class="navbar navbar-expand navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"
+>
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Data Monitoring</a>
+  <ul class="navbar-nav col px-3">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
+        Dashboard
+      </a>
+    </li>
+    <li class="nav-item" ngbDropdown>
+      <a
+        class="nav-link"
+        role="button"
+        ngbDropdownToggle
+        [class.active]="rlaDatalogger.isActive"
+      >
+        Datalogger
+      </a>
+      <div ngbDropdownMenu routerLinkActive #rlaDatalogger="routerLinkActive">
+        <a
+          class="dropdown-item"
+          routerLink="parameters"
+          routerLinkActive="active"
+        >
+          Parameters
+        </a>
+        <a
+          class="dropdown-item"
+          routerLink="data-requests"
+          routerLinkActive="active"
+        >
+          Data requests
+        </a>
+        <a
+          class="dropdown-item"
+          routerLink="network-overview"
+          routerLinkActive="active"
+        >
+          Network overview
+        </a>
+      </div>
+    </li>
+    <li class="nav-item" ngbDropdown *ngIf="isProductionVessel">
+      <a
+        class="nav-link"
+        role="button"
+        ngbDropdownToggle
+        [class.active]="rlaPPD.isActive"
+      >
+        PPD
+      </a>
+      <div ngbDropdownMenu routerLinkActive #rlaPPD="routerLinkActive">
+        <a
+          class="dropdown-item"
+          routerLink="production-parameters"
+          routerLinkActive="active"
+        >
+          Parameters
+        </a>
+        <a
+          class="dropdown-item"
+          routerLink="production-events"
+          routerLinkActive="active"
+        >
+          Events
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" [href]="productionViewerUrl" target="_blank"
+          >PPD Viewer</a
+        >
+      </div>
+    </li>
+  </ul>
+  <ul class="navbar-nav px-3">
+    <feedback-button></feedback-button>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        href="https://datamonitoring.allseas.global/SystemInformation/Forms/AllItems.aspx?FilterField1=Tags&FilterValue1=manual"
+        target="_blank"
+      >
+        Help
+      </a>
+    </li>
+    <li
+      class="nav-item text-nowrap"
+      ngbDropdown
+      placement="bottom-right"
+      *ngIf="!isRunningOnVessel"
+    >
+      <a class="nav-link" role="button" ngbDropdownToggle>
+        Vessel: {{ vessel }}
+      </a>
+      <div class="dropdown-menu-right" ngbDropdownMenu>
+        <a
+          class="dropdown-item"
+          href="/aud"
+          [class.active]="isVesselActive('AUD')"
+          >AUD</a
+        >
+        <a
+          class="dropdown-item"
+          href="/cal"
+          [class.active]="isVesselActive('CAL')"
+          >CAL</a
+        >
+        <a
+          class="dropdown-item"
+          href="/lor"
+          [class.active]="isVesselActive('LOR')"
+          >LOR</a
+        >
+        <a
+          class="dropdown-item"
+          href="/oce"
+          [class.active]="isVesselActive('OCE')"
+          >OCE</a
+        >
+        <a
+          class="dropdown-item"
+          href="/psc"
+          [class.active]="isVesselActive('PSC')"
+          >PSC</a
+        >
+        <a
+          class="dropdown-item"
+          href="/sol"
+          [class.active]="isVesselActive('SOL')"
+          >SOL</a
+        >
+        <a
+          class="dropdown-item"
+          href="/tgm"
+          [class.active]="isVesselActive('TGM')"
+          >TGM</a
+        >
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid"><router-outlet></router-outlet></div>
+
+<notifier-container></notifier-container>

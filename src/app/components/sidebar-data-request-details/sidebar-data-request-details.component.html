@@ -1,0 +1,29 @@
+<sidebar-block header="Data request details">
+  <ul class="specs" *ngIf="dataRequest">
+    <li>
+      <strong>Start (UTC):</strong> {{ timeStart.format(formatDateInput) }}
+    </li>
+    <li><strong>End (UTC):</strong> {{ timeEnd.format(formatDateInput) }}</li>
+    <li><strong>Aggregation:</strong> {{ dataRequest.AggregationType }}</li>
+    <li>
+      <strong>Aggregation period (s):</strong>
+      {{ dataRequest.AggregationPeriodMs / 1000 }}
+    </li>
+    <li>
+      <strong>Min value:</strong>
+      {{ dataRequest.ValueMin ? dataRequest.ValueMin : "–" }}
+    </li>
+    <li>
+      <strong>Max value:</strong>
+      {{ dataRequest.ValueMax ? dataRequest.ValueMax : "–" }}
+    </li>
+    <li><strong>Deadband:</strong> {{ dataRequest.DeadBand }}</li>
+    <li>
+      <strong>Sample rate (s):</strong> {{ dataRequest.SampleRateMs / 1000 }}
+    </li>
+  </ul>
+
+  <p class="sidebar-content" *ngIf="!dataRequest">
+    <small class="text-muted">Cannot show summary of diverse settings</small>
+  </p>
+</sidebar-block>

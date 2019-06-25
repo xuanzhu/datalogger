@@ -1,0 +1,38 @@
+@import "../../../styles/bootstrap";
+
+.favorite-parameters {
+  margin: 0 -1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: flex;
+}
+
+.nav-link:hover .remove-favorite {
+  display: inline;
+}
+
+.group-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.badge {
+  margin-left: 5px;
+  line-height: inherit;
+}
+
+.remove-favorite {
+  display: none;
+  margin-left: 5px;
+  font-size: 1.4em;
+  line-height: 1;
+  color: $danger;
+}
+
+.remove-favorite:hover {
+  color: darken($danger, 10%);
+}

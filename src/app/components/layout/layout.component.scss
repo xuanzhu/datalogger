@@ -1,0 +1,16 @@
+nav.navbar {
+  justify-content: space-between;
+}
+
+.container-fluid {
+  height: 100%;
+  padding-top: 48px;
+
+  & > router-outlet {
+    display: none;
+  }
+}
+
+.nav-link {
+  cursor: pointer;
+}

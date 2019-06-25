@@ -1,0 +1,9 @@
+<sidebar-block header="Selected parameters">
+  <ul class="specs" *ngIf="productionParameters.length > 0">
+    <li *ngFor="let parameter of productionParameters">{{ parameter.Name }}</li>
+  </ul>
+
+  <small *ngIf="productionParameters.length === 0"
+    >All parameters visible.</small
+  >
+</sidebar-block>
