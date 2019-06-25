@@ -6,6 +6,8 @@ import { VesselService } from "../../services/vessel.service";
   templateUrl: "./layout.component.html",
   styleUrls: ["./layout.component.scss"]
 })
+
+// test
 export class LayoutComponent {
   public get vessel(): string {
     return this.vesselService.getVessel();
