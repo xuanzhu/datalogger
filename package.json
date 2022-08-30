@@ -39,7 +39,7 @@
     "highcharts-sunburst": "^0.1.7",
     "jquery": "^3.3.1",
     "moment": "^2.22.2",
-    "moment-timezone": "^0.5.23",
+    "moment-timezone": "^0.5.35",
     "popper.js": "^1.14.4",
     "rxjs": "^6.3.2",
     "web-animations-js": "^2.3.1",
